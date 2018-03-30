@@ -6,15 +6,15 @@ using std::cerr;
 using std::endl;
 using std::pair;
 
-Pollard::Pollard(ZZ p, ZZ q, ZZ_p g, ZZ_p y)
+Pollard::Pollard(ZZ p, ZZ q, ZZ g, ZZ y)
 	 :p{p}, q{q}, g{g}, y{y}
 {
 	
 }
 
-ZZ_p Pollard::findX()
+ZZ Pollard::findX()
 {
-	ZZ_p A = conv<ZZ_p>(1), B = conv<ZZ_p>(1);
+	ZZ A = conv<ZZ>(1), B = conv<ZZ>(1);
 	size_t i = 0;
 	pair<ZZ, ZZ> alpha(0, 0);
 	pair<ZZ, ZZ> beta(0, 0);
@@ -28,39 +28,38 @@ ZZ_p Pollard::findX()
 	} while (A != B);
 
 	cout << "Steps: " << i << endl;
-	ZZ_p::init(q);
+	ZZ diff11 = SubMod(beta.first, alpha.first, q);
+	ZZ diff22 = SubMod(alpha.second, beta.second, q);
+	return MulMod(diff11, InvMod(diff22, q), q);
+	/*ZZ_p::init(q);
 	ZZ_p diff1 = conv<ZZ_p>(beta.first - alpha.first);
 	ZZ_p diff2 = conv<ZZ_p>(alpha.second - beta.second);
-	return diff1 / diff2;
+	return diff1 / diff2;*/
 }
 
-void Pollard::nextStep(ZZ_p & a, pair<ZZ, ZZ> & alpha)
+void Pollard::nextStep(ZZ & a, pair<ZZ, ZZ> & alpha)
 {
 	int modulo = conv<ZZ>(a) % 3;
 
 	if (modulo == 1)
 	{
-		a *= y;
+		a = MulMod(a, y, p);
 		alpha.second = AddMod(alpha.second, conv<ZZ>(1), q);
-		// alpha.second++;
 		return;
 	}
 
 	if (modulo == 0)
 	{
-		a *= a;
+		a = MulMod(a, a, p);
 		alpha.first = MulMod(alpha.first, conv<ZZ>(2), q);
 		alpha.second = MulMod(alpha.second, conv<ZZ>(2), q);
-		// alpha.first *= 2;
-		// alpha.second *= 2;
 		return;
 	}
 
 	if (modulo == 2)
 	{
-		a *= g;
+		a = MulMod(a, g, p);
 		alpha.first = AddMod(alpha.first, conv<ZZ>(1), q);
-		// alpha.first++;
 		return;
 	}
 

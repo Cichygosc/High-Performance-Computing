@@ -31,9 +31,7 @@ int main()
 	cout << p << " " << q << " " << g <<  " " << y << endl;
 	cout << "RandomX: " << randomX << endl;
 
-	ZZ_p::init(p);
-
-	Pollard pollard(p, q, conv<ZZ_p>(g), conv<ZZ_p>(y));
+	Pollard pollard(p, q, g, y);
 	cout << "FoundX: " << pollard.findX() << endl;
 
 	return 0;
