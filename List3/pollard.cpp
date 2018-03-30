@@ -9,7 +9,7 @@ using std::endl;
 using std::pair;
 using std::hex;
 
-#define MAX_LENGTH 20480
+#define MAX_LENGTH 81920
 
 Pollard::Pollard(ZZ p, ZZ q, ZZ g, ZZ y)
 	 :p{p}, q{q}, g{g}, y{y}

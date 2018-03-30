@@ -30,8 +30,13 @@ int main()
 	cout << "p: " << p << " q: " << q << " g: " << g <<  " y: " << y << endl;
 	cout << "RandomX: " << randomX << endl;
 
+	ZZ foundX;
 	Pollard pollard(p, q, g, y);
-	cout << "FoundX: " << pollard.findX() << endl;
+//	do
+//	{
+		foundX = pollard.findX();
+//	} while (foundX != randomX);
+	cout << "FoundX: " << foundX << endl;
 
 	return 0;
 }
