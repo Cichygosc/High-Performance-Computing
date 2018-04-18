@@ -31,10 +31,6 @@ ZZ Pollard::findX()
 	ZZ diff11 = SubMod(beta.first, alpha.first, q);
 	ZZ diff22 = SubMod(alpha.second, beta.second, q);
 	return MulMod(diff11, InvMod(diff22, q), q);
-	/*ZZ_p::init(q);
-	ZZ_p diff1 = conv<ZZ_p>(beta.first - alpha.first);
-	ZZ_p diff2 = conv<ZZ_p>(alpha.second - beta.second);
-	return diff1 / diff2;*/
 }
 
 void Pollard::nextStep(ZZ & a, pair<ZZ, ZZ> & alpha)

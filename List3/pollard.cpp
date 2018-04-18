@@ -22,7 +22,7 @@ ZZ Pollard::findX()
 	bool finished = false; 
 	pair<ZZ, ZZ> result1;
 	pair<ZZ, ZZ> result2;
-	#pragma omp parallel shared(p, q, g, y, distinguisedPoints, finished, result1, result2)
+	#pragma omp parallel firstprivate(p, q, g, y) shared(distinguisedPoints, finished, result1, result2)
 	{
 		size_t i = 0;
 
@@ -66,7 +66,6 @@ ZZ Pollard::findX()
 			}
 		}
 	}
-
 
 	ZZ diff11 = SubMod(result1.first, result2.first, q);
 	ZZ diff22 = SubMod(result2.second, result1.second, q);
