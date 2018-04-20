@@ -9,13 +9,11 @@ using namespace NTL;
 
 int main()
 {
-
- RR::SetOutputPrecision(25);
 	ZZ p, q;
 
 	do 
 	{
-		GenGermainPrime(p, 50);
+		GenGermainPrime(p, 45);
 		q = (p - 1) / 2;
 	} while (ProbPrime(q) == 0);
 	

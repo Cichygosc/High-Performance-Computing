@@ -27,9 +27,7 @@ private:
 	NTL::ZZ g;
 	NTL::ZZ y;
 	int k;
-	int u;
-	int v;
-	
+
 private:
 	int hash(const NTL::ZZ & s);
 	std::string sha256(const std::string str);

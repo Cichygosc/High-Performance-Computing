@@ -1,5 +1,6 @@
 #include "kangaroo.hpp"
 #include <openssl/sha.h>
+#include <omp.h>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -9,74 +10,86 @@ using namespace std;
 using namespace NTL;
 
 Kangaroo::Kangaroo(ZZ interval, ZZ p, ZZ q, ZZ g, ZZ y)
-	:interval{interval}, p{p}, q{q}, g{g}, y{y}, k{0}, u{3}, v{1}
+	:interval{interval}, p{p}, q{q}, g{g}, y{y}, k{0}
 {
 	generateJumps(interval);
 }
 
 ZZ Kangaroo::findX()
 {
-	ZZ xTame = PowerMod(g, interval / 2, p);
-	ZZ dTame = conv<ZZ>(0);
-	ZZ xWild = y;
-	ZZ dWild = conv<ZZ>(0);
+	ZZ intervalMiddle = interval / 2;
+	ZZ resultTame;
+	ZZ resultWild;
 	bool finished = false;
-
-	ZZ dTameFinish = conv<ZZ>(0);
-	ZZ dWildFinish = conv<ZZ>(0);
-	do
-	{	
-		nextStep(xTame, dTame);
-		if (isDistinguished(xTame))
+	#pragma omp parallel firstprivate(p, q, g, y, intervalMiddle) shared(distinguishedPoints, finished, resultTame, resultWild)
+	{
+		int tid = omp_get_thread_num();
+		NTL::ZZ v = SqrRoot(interval) / 2;
+		NTL::ZZ x;
+		NTL::ZZ d;
+		KangarooType type;
+		if (tid < 2)
 		{
-			if (isAlreadyInSet(xTame))
-			{
-				if (distinguishedPoints[xTame].first != KangarooType::Tame)
-				{
-					dTameFinish = dTame;
-					dWildFinish = distinguishedPoints[xTame].second;
-					finished = true;
-				}
-			}	
-			else
-			{
-				addDistinguished(xTame, dTame, KangarooType::Tame);
-			}
+			type = KangarooType::Tame;
+			x = PowerMod(g, intervalMiddle + tid * v, p);
+			d = tid * v;
+		}
+		else
+		{
+			type = KangarooType::Wild;
+			x = MulMod(y, PowerMod(g, (tid - 2) * v, p), p);
+			d = (tid - 2) * v;
 		}
 
-		nextStep(xWild, dWild);
-		if (isDistinguished(xWild))
+		// cout << type << " starts at " << x << " with distance " << d << endl;
+
+		do
 		{
-			if (isAlreadyInSet(xWild))
+			nextStep(x, d);
+			if (isDistinguished(x))
 			{
-				if (distinguishedPoints[xWild].first != KangarooType::Wild)
+				if (isAlreadyInSet(x))
 				{
-					dTameFinish = distinguishedPoints[xWild].second;
-					dWildFinish = xWild;
-					finished = true;
+					// cout << type << " found same as " << distinguishedPoints[x].first << endl;
+					if (distinguishedPoints[x].first != type)
+					{
+						if (type == KangarooType::Tame)
+						{
+							resultTame = d;
+							resultWild = distinguishedPoints[x].second;
+							finished = true;
+						}
+						else
+						{
+							resultTame = distinguishedPoints[x].second;
+							resultWild = d;
+							finished = true;
+						}
+					}
 				}
-			}	
-			else
-			{
-				addDistinguished(xWild, dWild, KangarooType::Wild);
+				else
+				{
+					// cout << type << " found new at " << x << endl;
+					addDistinguished(x, d, type);
+				}
 			}
-		}
 
-	} while (!finished);
+		} while (!finished);
+	}
 
-	return interval / 2 + dTameFinish - dWildFinish;
+	return AddMod(intervalMiddle, SubMod(resultTame, resultWild, q), q);
 }
 
 void Kangaroo::nextStep(ZZ & x, ZZ & d)
 {
 	int h = hash(x);
 	x = MulMod(x, R[h], p);
-	d += S[h];
+	d = AddMod(d, S[h], q);
 }
 
 bool Kangaroo::isDistinguished(const ZZ & x)
 {
-	return (x & 0x3FF) == conv<ZZ>(0);
+	return (x & 0xFFF) == conv<ZZ>(0);
 }
 
 bool Kangaroo::isAlreadyInSet(const ZZ & x)
