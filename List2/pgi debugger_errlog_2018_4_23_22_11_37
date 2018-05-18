@@ -1,0 +1,340 @@
+PGI Debugger error detected at 22:11:37, 4/23/2018
+==================================================
+PGI Release 17.10 (2017.1019)
+==================================================
+PGDEBUG terminated unexpectedly: /opt/pgi/linux86-64/17.10/bin/pgdebug: EXITED with exit code 139
+==================================================
+java.lang.Error: PGDEBUG terminated unexpectedly: /opt/pgi/linux86-64/17.10/bin/pgdebug: EXITED with exit code 139
+	at com.pgroup.util.PGError.log_error(PGError.java:205)
+	at com.pgroup.util.PGError.report_error(PGError.java:379)
+	at com.pgroup.util.PGError.report(PGError.java:138)
+	at com.pgroup.util.PGError.report(PGError.java:154)
+	at jpgdbgMessage.checkPgdebugStatus(jpgdbgMessage.java:697)
+	at jpgdbgMessage.getNextMessage(jpgdbgMessage.java:343)
+	at jpgdbg.messenger(jpgdbg.java:1177)
+	at jpgdbg.main(jpgdbg.java:1031)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at SplashLoader$1.run(SplashLoader.java:67)
+	at java.lang.Thread.run(Thread.java:745)
+==================================================
+Java Properties:
+java.version: 1.8.0_112
+sun.arch.data.model: 64
+java.home: /opt/pgi/linux86-64/2017/java/jre1.8.0_112
+os.arch: amd64
+os.name: Linux
+os.version: 4.9.0-6-amd64
+java.vm.version: 25.112-b15
+java.vm.vendor: Oracle Corporation
+java.vm.name: Java HotSpot(TM) 64-Bit Server VM
+java.class.path: /opt/pgi/linux86-64/17.10/bin/jpgdbg.jar::/opt/pgi/linux86-64/17.10/bin/PGcomp.jar:/opt/pgi/linux86-64/17.10/bin/PGlaf.jar:/opt/pgi/linux86-64/17.10/bin/PGutil.jar:/opt/pgi/linux86-64/17.10/bin/jide-common.jar:/opt/pgi/linux86-64/17.10/bin/jide-dock.jar:/opt/pgi/linux86-64/17.10/bin/rsyntaxtextarea.jar:/opt/pgi/linux86-64/17.10/bin/ganymed-ssh2-build251.jar:/opt/pgi/linux86-64/17.10/bin/balloontip.jar
+java.ext.dirs: /opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/ext:/usr/java/packages/lib/ext
+java.library.path: /usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+sun.boot.class.path: /opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/resources.jar:/opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/rt.jar:/opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/sunrsasign.jar:/opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/jsse.jar:/opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/jce.jar:/opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/charsets.jar:/opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/jfr.jar:/opt/pgi/linux86-64/2017/java/jre1.8.0_112/classes
+sun.boot.library.path: /opt/pgi/linux86-64/2017/java/jre1.8.0_112/lib/amd64
+==================================================
+pgdbg-specific error log
+------------------------------------
+Total threads:   0
+Total processes: 0
+Current thread:  0
+Current process: 0
+State:           UNKNOWN
+Model:           UNKNOWN
+
+------------------------------------
+gui/pgdbg message log - oldest first
+------------------------------------
+send: [debug "/home/jacob/Dokumenty/High Performance Computing/List2/firstprivate"
+]
+send: [print "\7>8.2 start \n";files;print "\n\7>8.2 end \n"
+]
+recv data: [PGI Debugger 17.10-0 x86-64 (Workstation, 16 Process)
+PGI Compilers and Tools
+Copyright (c) 2017, NVIDIA CORPORATION.  All rights reserved.
+]
+recv: [pid 6208
+]
+send: [print "\7>4194304.15 start \n";regs -xml -info;print "\n\7>4194304.15 end \n"
+]
+recv data: [
+pgdbg> ]
+recv: [timestamp 1521810678
+]
+recv data: [/home/jacob/Dokumenty/High Performance Computing/List2/firstprivate is not an executable
+
+pgdbg> ]
+recv: [>8.2 start 
+]
+recv data: [
+]
+recv data: [
+
+]
+recv: [>8.2 end 
+]
+recv: [>4194304.15 start 
+]
+recv data: [
+]
+recv data: [<?xml version="1.0"?>
+<pgdbgmsg>
+  <header>
+    <ver_major>0</ver_major>
+    <ver_minor>1</ver_minor>
+    <tag>REGSINFO</tag>
+  </header>
+  <body>
+    <regsinfo>
+      <regsinfogrp>
+        <name>GP</name>
+        <modes default="scalar">
+          <scalar/>
+        </modes>
+        <formats default="X64">
+          <fmt>
+            <tag>X64</tag>
+            <displayname>hex 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>X32</tag>
+            <displayname>hex 32</displayname>
+          </fmt>
+          <fmt>
+            <tag>X16</tag>
+            <displayname>hex 16</displayname>
+          </fmt>
+          <fmt>
+            <tag>X8</tag>
+            <displayname>hex 08</displayname>
+          </fmt>
+          <fmt>
+            <tag>I64</tag>
+            <displayname>int 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>I32</tag>
+            <displayname>int 32</displayname>
+          </fmt>
+          <fmt>
+            <tag>I16</tag>
+            <displayname>int 16</displayname>
+          </fmt>
+          <fmt>
+            <tag>I8</tag>
+            <displayname>int 8</displayname>
+          </fmt>
+        </formats>
+      </regsinfogrp>
+      <regsinfogrp>
+        <name>FLAGS</name>
+        <modes default="scalar">
+          <scalar/>
+        </modes>
+        <formats default="X32">
+          <fmt>
+            <tag>X32</tag>
+            <displayname>hex 32</displayname>
+          </fmt>
+        </formats>
+      </regsinfogrp>
+      <regsinfogrp>
+        <name>X87</name>
+        <modes default="scalar">
+          <scalar/>
+        </modes>
+        <formats default="F64">
+          <fmt>
+            <tag>X64</tag>
+            <displayname>hex 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>X32</tag>
+            <displayname>hex 32</displayname>
+          </fmt>
+          <fmt>
+            <tag>F64</tag>
+            <displayname>float 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>F32</tag>
+            <displayname>float 32</displayname>
+          </fmt>
+        </formats>
+      </regsinfogrp>
+      <regsinfogrp>
+        <name>XMM</name>
+        <modes default="vector">
+          <scalar/>
+          <vector/>
+        </modes>
+        <formats default="F32">
+          <fmt>
+            <tag>X64</tag>
+            <displayname>hex 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>X32</tag>
+            <displayname>hex 32</displayname>
+          </fmt>
+          <fmt>
+            <tag>F64</tag>
+            <displayname>float 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>F32</tag>
+            <displayname>float 32</displayname>
+          </fmt>
+        </formats>
+      </regsinfogrp>
+      <regsinfogrp>
+        <name>YMM</name>
+        <modes default="vector">
+          <scalar/>
+          <vector/>
+        </modes>
+        <formats default="F32">
+          <fmt>
+            <tag>X64</tag>
+            <displayname>hex 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>X32</tag>
+            <displayname>hex 32</displayname>
+          </fmt>
+          <fmt>
+            <tag>F64</tag>
+            <displayname>float 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>F32</tag>
+            <displayname>float 32</displayname>
+          </fmt>
+        </formats>
+      </regsinfogrp>
+      <regsinfogrp>
+        <name>MXCSR</name>
+        <modes default="scalar">
+          <scalar/>
+        </modes>
+        <formats default="X32">
+          <fmt>
+            <tag>X32</tag>
+            <displayname>hex 32</displayname>
+          </fmt>
+        </formats>
+      </regsinfogrp>
+      <regsinfogrp>
+        <name>ARGS</name>
+        <modes default="scalar">
+          <scalar/>
+        </modes>
+        <formats default="F32">
+          <fmt>
+            <tag>X64</tag>
+            <displayname>hex 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>X32</tag>
+            <displayname>hex 32</displayname>
+          </fmt>
+          <fmt>
+            <tag>I64</tag>
+            <displayname>i]
+recv data: [nt 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>I32</tag>
+            <displayname>int 32</displayname>
+          </fmt>
+          <fmt>
+            <tag>F64</tag>
+            <displayname>float 64</displayname>
+          </fmt>
+          <fmt>
+            <tag>F32</tag>
+            <displayname>float 32</displayname>
+          </fmt>
+        </formats>
+      </regsinfogrp>
+    </regsinfo>
+  </body>
+</pgdbgmsg>
+
+
+]
+recv: [>4194304.15 end 
+]
+send: [print "\7>262144.8 start \n";status;print "\n\7>262144.8 end \n"
+]
+recv: [>262144.8 start 
+]
+recv data: [
+No events defined.
+
+
+]
+recv: [>262144.8 end 
+]
+send: [rerun
+]
+recv data: [ERROR: No program selected.  Use the 'debug' and 'connect' commands.
+
+pgdbg> ]
+send: [cont
+]
+recv data: [ERROR: (0x1) Target has not been run.  Please use the 'run' command..
+
+pgdbg> ]
+send: [run
+]
+recv data: [ERROR: No program selected.  Use the 'debug' and 'connect' commands.
+
+pgdbg> ]
+send: [print "\7>4194304.15 start \n";regs -xml -grp=gp -fmt=x64 -mode=scalar;print "\n\7>4194304.15 end \n"
+]
+recv: [>4194304.15 start 
+]
+recv data: [
+ERROR: No current thread.
+
+
+]
+recv: [>4194304.15 end 
+]
+send: [quit -q
+]
+recv data: []
+recv data: [PGI Debugger 17.10-0 x86-64 (Workstation, 16 Process)
+PGI Compilers and Tools
+Copyright (c) 2017, NVIDIA CORPORATION.  All rights reserved.
+]
+send: [debug "/home/jacob/Dokumenty/High Performance Computing/List2/firstprivate"
+]
+send: [print "\7>8.2 start \n";files;print "\n\7>8.2 end \n"
+]
+recv: [pid 6230
+]
+recv data: [
+pgdbg> ]
+recv: [timestamp 1521810678
+]
+recv data: [/home/jacob/Dokumenty/High Performance Computing/List2/firstprivate is not an executable
+
+pgdbg> ]
+recv: [>8.2 start 
+]
+recv data: [
+]
+recv data: [
+
+]
+recv: [>8.2 end 
+]
+send: [quit -q
+]
+------------------------------------
+==================================================

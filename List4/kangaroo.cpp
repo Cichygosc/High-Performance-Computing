@@ -24,6 +24,9 @@ ZZ Kangaroo::findX()
 	#pragma omp parallel firstprivate(p, q, g, y, intervalMiddle) shared(distinguishedPoints, finished, resultTame, resultWild)
 	{
 		int tid = omp_get_thread_num();
+		// m = 4
+		// B = m * sqr(b - a) / 4
+		// v = B / (m / 2)
 		NTL::ZZ v = SqrRoot(interval) / 2;
 		NTL::ZZ x;
 		NTL::ZZ d;

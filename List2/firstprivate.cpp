@@ -19,6 +19,7 @@ int main()
 		a[i] = i;
 	}
 
+	omp_set_num_threads(4);
 	#pragma omp parallel private(tid, i) shared(nthreads, a)
 	{
 		tid = omp_get_thread_num();

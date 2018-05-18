@@ -15,3 +15,6 @@ ordered: ordered.cpp
 
 scheduling: scheduling.cpp
 	g++ scheduling.cpp -o scheduling -fopenmp -lpthread
+
+pgi_firstprivate: firstprivate.cpp
+	pgc++ firstprivate.cpp -g -o firstprivate -mp -lpthread

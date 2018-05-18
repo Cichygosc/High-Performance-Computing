@@ -27,9 +27,8 @@ ZZ Pollard::findX()
 		nextStep(B, beta);
 	} while (A != B);
 
-	cout << "Steps: " << i << endl;
-	ZZ diff11 = SubMod(beta.first, alpha.first, q);
-	ZZ diff22 = SubMod(alpha.second, beta.second, q);
+	ZZ diff11 = SubMod(result1.first, result2.first, q);
+	ZZ diff22 = SubMod(result2.second, result1.second, q);
 	return MulMod(diff11, InvMod(diff22, q), q);
 }
 
@@ -44,7 +43,7 @@ void Pollard::nextStep(ZZ & a, pair<ZZ, ZZ> & alpha)
 		return;
 	}
 
-	if (modulo == 0)
+	if (modulo == 2)
 	{
 		a = MulMod(a, a, p);
 		alpha.first = MulMod(alpha.first, conv<ZZ>(2), q);
@@ -52,12 +51,11 @@ void Pollard::nextStep(ZZ & a, pair<ZZ, ZZ> & alpha)
 		return;
 	}
 
-	if (modulo == 2)
+	if (modulo == 0)
 	{
 		a = MulMod(a, g, p);
 		alpha.first = AddMod(alpha.first, conv<ZZ>(1), q);
 		return;
 	}
-
 }
 
